@@ -9,9 +9,10 @@
 #define ZDV_TREE_H
 
 typedef struct Node {
-    int keyCount; // kann nur die Werte 1, 2 oder 3 annehmen
+    int keyCount; // kann nur die Werte 1, 2 oder 3 annehmen // anzahl n
     int key[3];
     int value[3];
+    bool leaf();
     Node* child[4];  // bei bis zu 3 Schlüsseln können bis zu 4 Teilbäume verwaltet werden
 }Node;
 
@@ -24,13 +25,16 @@ typedef struct Result {
 
 class ZdvTree {
 private:
+    const int MINIMUM_DEGREE = 2; // t
     Node* root;
+    void splitChild(Node* father, int child);
 
 public:
     ZdvTree();
     ~ZdvTree();
     Result insertKey(int key, int value);
     Result searchKey(int key);
+
 };
 
 #endif // ZDV_TREE_H
